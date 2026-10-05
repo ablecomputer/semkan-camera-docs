@@ -1,30 +1,203 @@
 <!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>各種操作説明 | セムカンカメラ</title>
-    <style>
-      :root { color-scheme: light; }
-      body { margin: 0; background: #f7f8fa; color: #243044; font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif; line-height: 1.8; }
-      main { box-sizing: border-box; width: min(100% - 2rem, 52rem); margin: 2rem auto; padding: clamp(1.25rem, 4vw, 3rem); background: #fff; border: 1px solid #e1e5eb; border-radius: 12px; }
-      h1 { margin-top: 0; font-size: clamp(1.5rem, 4vw, 2rem); }
-      h2 { margin-top: 2.5rem; padding-bottom: .3rem; border-bottom: 1px solid #d9dfe7; font-size: 1.2rem; }
-      p, li { overflow-wrap: anywhere; }
-      ol, ul { padding-left: 1.7em; }
-      li { margin: .5rem 0; }
-      table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-      th, td { padding: .5rem .7rem; border: 1px solid #cbd3dd; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
-      th { width: 10rem; background: #f2f5f8; font-weight: 600; }
-      a { color: #145ca8; }
-      a:focus-visible { outline: 3px solid #145ca8; outline-offset: 3px; }
-      @media (max-width: 480px) { main { width: 100%; margin: 0; border: 0; border-radius: 0; } th { width: 6rem; } }
-    </style>
-  </head>
-  <body>
-    <main><h1 id="各種操作説明">各種操作説明</h1>
-
-<p>ガイドページです（工事中）</p>
-</main>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="セムカンカメラの操作説明。領収書の取り込み、登録単位の選択、読み取り結果の修正、保存、セムカン本体への送信を案内します。">
+  <meta name="theme-color" content="#145ca8">
+  <title>各種操作説明 | セムカンカメラ</title>
+  <style>
+    :root { color-scheme: light; --ink: #243044; --muted: #536176; --blue: #145ca8; --line: #dde4ed; }
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 1rem; }
+    body { margin: 0; background: #f4f6f9; color: var(--ink); font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif; font-size: 1rem; line-height: 1.85; }
+    a { color: var(--blue); text-underline-offset: .2em; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+    .skip { position: absolute; left: 1rem; top: -5rem; padding: .75rem; background: #fff; z-index: 2; }
+    .skip:focus { top: 1rem; }
+    main { max-width: 56rem; margin: 2rem auto; padding: clamp(1.25rem, 5vw, 3rem); background: #fff; border: 1px solid var(--line); border-radius: 16px; }
+    header { padding-bottom: 1.5rem; border-bottom: 1px solid var(--line); }
+    .brand { margin: 0 0 .5rem; color: var(--blue); font-weight: 700; font-size: .9rem; letter-spacing: .06em; }
+    h1 { margin: 0 0 .6rem; font-size: clamp(1.75rem, 5vw, 2.25rem); line-height: 1.5; }
+    h2 { margin: 0 0 1rem; font-size: 1.3rem; line-height: 1.6; }
+    h3 { margin: 1.5rem 0 .5rem; font-size: 1.05rem; }
+    p { margin: .7rem 0; }
+    header p:last-child { margin-bottom: 0; color: var(--muted); }
+    p, li, dd, a, summary { overflow-wrap: anywhere; }
+    nav { margin-top: 1.5rem; padding: 1.2rem; background: #f4f7fb; border-radius: 10px; }
+    nav h2 { font-size: 1rem; margin-bottom: .6rem; }
+    .toc { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: .25rem 1.25rem; }
+    .toc a { display: block; padding: .55rem .2rem; text-decoration: none; line-height: 1.6; }
+    .toc a:hover { text-decoration: underline; }
+    section { padding-top: 2.25rem; margin-top: 2.25rem; border-top: 1px solid var(--line); }
+    section:first-of-type { border: 0; margin-top: 0; }
+    .number { color: var(--blue); margin-right: .55rem; font-size: .95rem; }
+    ol, ul { padding-left: 1.5rem; }
+    li { margin: .65rem 0; padding-left: .2rem; }
+    li::marker { color: var(--blue); font-weight: 700; }
+    .note { padding: .9rem 1rem; margin: 1.25rem 0; background: #edf4fc; border-left: 3px solid var(--blue); border-radius: 0 8px 8px 0; }
+    .notice { background: #fff8eb; border-color: #a96809; }
+    .note p { margin: .25rem 0; }
+    .methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin: 1.25rem 0; }
+    .method { padding: 1rem; border: 1px solid var(--line); border-radius: 10px; }
+    .method h3 { margin: 0 0 .5rem; color: var(--blue); }
+    .method p { margin: .5rem 0 0; font-size: .95rem; }
+    .example { color: var(--muted); }
+    .fields { display: grid; grid-template-columns: 5rem 1fr; border-top: 1px solid var(--line); }
+    .fields dt, .fields dd { padding: .8rem .4rem; margin: 0; border-bottom: 1px solid var(--line); }
+    .fields dt { font-weight: 700; }
+    details { border-bottom: 1px solid var(--line); }
+    summary { padding: 1rem .2rem; font-weight: 600; cursor: pointer; }
+    details p { margin: 0 0 1rem; padding: 0 .2rem; }
+    footer { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+    footer a { display: inline-block; padding: .65rem 0; }
+    @media (max-width: 600px) {
+      main { width: 100%; margin: 0; border: 0; border-radius: 0; }
+      .toc, .methods { grid-template-columns: 1fr; }
+      section { padding-top: 1.75rem; margin-top: 1.75rem; }
+    }
+    @media print {
+      body { background: #fff; }
+      main { max-width: none; margin: 0; padding: 0; border: 0; }
+      nav, .skip, .back { display: none; }
+      h2, h3 { break-after: avoid; }
+      .method, .note { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#start">操作手順へ進む</a>
+  <main id="top">
+    <header>
+      <p class="brand">セムカンカメラ</p>
+      <h1>各種操作説明</h1>
+      <p>領収書を撮影して内容を確認し、セムカン本体へ送信するまでの手順をご案内します。</p>
+    </header>
+    <nav aria-label="操作説明の目次">
+      <h2>知りたい操作を選ぶ</h2>
+      <ol class="toc">
+        <li><a href="#start">01　基本の流れ</a></li>
+        <li><a href="#method">02　登録単位を選ぶ</a></li>
+        <li><a href="#single">03　領収書を1枚取り込む</a></li>
+        <li><a href="#batch">04　複数の領収書を取り込む</a></li>
+        <li><a href="#edit">05　読み取り結果を確認・修正する</a></li>
+        <li><a href="#save">06　保存した支出を確認・編集する</a></li>
+        <li><a href="#send">07　セムカン本体へ送信する</a></li>
+        <li><a href="#settings">08　設定を変更する</a></li>
+        <li><a href="#faq">09　困ったときは</a></li>
+      </ol>
+    </nav>
+    <section id="start" aria-labelledby="start-title">
+      <h2 id="start-title"><span class="number">01</span>基本の流れ</h2>
+      <ol>
+        <li><strong>取り込む：</strong>ホームで登録単位を選び、「カメラで撮影」または「写真から選ぶ」をタップします。</li>
+        <li><strong>確認する：</strong>画像の四隅や領収書の枠を合わせ、読み取り後に日付・支払先・摘要・金額を確認します。</li>
+        <li><strong>保存する：</strong>確認した支出を端末に保存します。</li>
+        <li><strong>送信する：</strong>ホームの「セムカン本体へ送信」から対象を選び、送信します。</li>
+      </ol>
+      <aside class="note"><p>撮影・確認・保存はログインせずに利用できます。セムカン本体への送信には、ログインとインターネット接続が必要です。</p></aside>
+    </section>
+    <section id="method" aria-labelledby="method-title">
+      <h2 id="method-title"><span class="number">02</span>登録単位を選ぶ</h2>
+      <p>ホームの「登録単位」をタップし、領収書から作成する支出の件数を選びます。選択後は「この登録単位を使う」をタップしてください。</p>
+      <div class="methods">
+        <article class="method"><h3>1枚 → 1件</h3><p>領収書1枚から、支出を1件作成します。</p><p class="example">例：1枚の領収書をそのまま登録する。</p></article>
+        <article class="method"><h3>複数枚 → 1件</h3><p>複数の領収書の金額を合計し、支出を1件作成します。</p><p class="example">例：同じ支出にまとめたい領収書を一緒に登録する。</p></article>
+        <article class="method"><h3>複数枚 → 複数件</h3><p>領収書ごとに、支出を1件ずつ作成します。</p><p class="example">例：3枚の領収書から3件の支出を登録する。</p></article>
+      </div>
+      <p>複数枚を取り込む場合は、最大8枚の領収書をA4台紙に並べて撮影してください。領収書同士が重ならないように、間隔を空けます。</p>
+    </section>
+    <section id="single" aria-labelledby="single-title">
+      <h2 id="single-title"><span class="number">03</span>領収書を1枚取り込む</h2>
+      <ol>
+        <li>登録単位を「1枚 → 1件」にします。</li>
+        <li>「カメラで撮影」をタップして領収書全体を撮影します。保存済みの画像を使う場合は「写真から選ぶ」をタップします。</li>
+        <li>「領収書の確認」で、画像の四隅が領収書の角に合っているか確認し、ずれている場合は動かして調整します。</li>
+        <li>四隅を確定すると、画像の傾きを補正して文字を読み取ります。処理が終わるまでお待ちください。</li>
+        <li><a href="#edit">読み取り結果を確認・修正</a>し、「保存」をタップします。すぐに送信する場合は「送信」をタップします。</li>
+      </ol>
+      <p>撮影時は「標準」または「離れて撮影」を選べます。領収書全体が収まり、文字にピントが合う位置で撮影してください。</p>
+      <p><a href="../shooting-guidelines/">きれいに撮影するコツを見る</a></p>
+    </section>
+    <section id="batch" aria-labelledby="batch-title">
+      <h2 id="batch-title"><span class="number">04</span>複数の領収書を取り込む</h2>
+      <ol>
+        <li>登録単位を「複数枚 → 1件」または「複数枚 → 複数件」にします。</li>
+        <li>A4台紙に領収書を最大8枚並べ、「カメラで撮影」で台紙全体を撮影します。保存済みの台紙画像は「写真から選ぶ」で取り込めます。</li>
+        <li>「台紙の確認」で四隅を台紙の角に合わせ、確定します。</li>
+        <li>領収書の枠を確認します。画像上の枠や番号ボタンで対象を選び、位置や四隅を調整します。枠がない領収書は「＋」で追加し、不要な枠はごみ箱ボタンで削除します。</li>
+        <li>すべての領収書に枠があることを確認し、「確定」をタップして文字を読み取ります。</li>
+      </ol>
+      <aside class="note notice"><p><strong>枠のない領収書は登録されません。</strong>枠の数と領収書の枚数を照らし合わせ、1枚につき1つの枠が合っていることを確認してください。</p></aside>
+      <h3>「複数枚 → 1件」を選んだ場合</h3>
+      <p>共通の日付・支払先・摘要を入力し、番号ごとの金額と合計金額を確認します。「保存」で1件の支出として保存します。画像には領収書の番号が付きます。</p>
+      <h3>「複数枚 → 複数件」を選んだ場合</h3>
+      <p>番号を切り替えながら、各領収書の日付・支払先・摘要・金額を確認します。不要な領収書は登録対象から削除できます。全件の確認が終わったら「一括保存」をタップします。</p>
+    </section>
+    <section id="edit" aria-labelledby="edit-title">
+      <h2 id="edit-title"><span class="number">05</span>読み取り結果を確認・修正する</h2>
+      <p>自動で読み取った内容は、必ず原本画像と照らし合わせてください。文字を読み取れなかった場合も、同じ画像を見ながら手入力できます。</p>
+      <dl class="fields">
+        <dt>日付</dt><dd>領収書に記載された日付を確認します。</dd>
+        <dt>支払先</dt><dd>店舗名や会社名など、支払いの相手先を入力します。</dd>
+        <dt>摘要</dt><dd>支出の内容を入力します。</dd>
+        <dt>金額</dt><dd>登録する税込金額を確認します。必要に応じて計算式を入力できます。</dd>
+      </dl>
+      <h3>画像の文字を選んで入力する</h3>
+      <ol>
+        <li>修正する項目を選び、画像から文字を選択する操作に切り替えます。</li>
+        <li>画像上の文字の枠をタップして、選んだ項目へ入力します。</li>
+        <li>支払先・摘要は複数の文字枠を選べます。最初の選択で現在の入力を置き換え、2つ目以降は選んだ順に追加します。</li>
+      </ol>
+      <p>画像は2本の指で拡大・縮小でき、拡大後は動かして細部を確認できます。入力欄は手入力でも修正できます。</p>
+      <h3>金額を計算して入力する</h3>
+      <p>金額欄では、足し算・引き算・掛け算・割り算・％を含む式を使えます。たとえば「1000 + 500」と入力すると、計算結果は1,500円になります。式だけでなく、表示された計算結果も確認してください。</p>
+    </section>
+    <section id="save" aria-labelledby="save-title">
+      <h2 id="save-title"><span class="number">06</span>保存した支出を確認・編集する</h2>
+      <ol>
+        <li>ホームの「未送信の支出」から、確認したい支出をタップします。</li>
+        <li>保存した原本画像と入力内容を確認し、必要な項目を修正します。</li>
+        <li>「保存」をタップして変更を保存します。</li>
+      </ol>
+      <p>不要な支出は、詳細画面の「削除」から削除できます。確認画面で内容を確認してから確定してください。</p>
+      <aside class="note notice"><p>保存した支出と画像は端末内に保管されます。「保存」だけではセムカン本体へ送信されません。支出を削除すると、原本画像も削除されます。</p></aside>
+    </section>
+    <section id="send" aria-labelledby="send-title">
+      <h2 id="send-title"><span class="number">07</span>セムカン本体へ送信する</h2>
+      <ol>
+        <li>インターネットに接続し、ホームの「セムカン本体へ送信」をタップします。</li>
+        <li>未ログインの場合は、メールアドレス（ID）とパスワードでログインします。ワンタイムコードが求められた場合は入力します。</li>
+        <li>送信する支出を選びます。すべて選ぶ場合は「全選択」を使います。</li>
+        <li>対象を確認して送信し、完了するまでお待ちください。</li>
+        <li>メニューの「セムカン本体へ」からセムカンを開き、送信した内容を確認します。</li>
+      </ol>
+      <aside class="note notice"><p><strong>送信に成功した支出は、画像とともに端末から自動削除されます。</strong>送信後の内容はセムカン本体で確認してください。</p></aside>
+      <p>途中で送信に失敗すると、その時点で送信を停止します。成功した分は送信済みで、失敗した分とそれ以降の支出は端末に残ります。接続やログイン状態を確認し、残った支出を再送してください。</p>
+      <p>読み取り後の確認画面や保存済み支出の詳細画面にある「送信」からも、その支出を送信できます。</p>
+    </section>
+    <section id="settings" aria-labelledby="settings-title">
+      <h2 id="settings-title"><span class="number">08</span>設定を変更する</h2>
+      <p>ホーム左上のメニューボタンから「設定」を開きます。</p>
+      <h3>開始時の撮影方法</h3>
+      <p>1枚だけの撮影を始めるときの方法を、「前回の選択を使用（おすすめ）」「標準（1×）」「離れて撮影（1.75×）」から選べます。</p>
+      <h3>四隅調整時に拡大鏡を表示</h3>
+      <p>オンにすると、四隅を動かしている位置を拡大して確認できます。細かな枠調整にご利用ください。</p>
+    </section>
+    <section id="faq" aria-labelledby="faq-title">
+      <h2 id="faq-title"><span class="number">09</span>困ったときは</h2>
+      <details><summary>文字が正しく読み取れません</summary><p>画像を確認し、日付・支払先・摘要・金額を手入力で修正してください。撮り直す場合は、影や反射を避け、文字にピントを合わせます。<a href="../shooting-guidelines/">撮影ガイドライン</a>もご確認ください。</p></details>
+      <details><summary>複数枚のうち、一部の領収書が取り込まれません</summary><p>読み取り前の枠確認画面で、すべての領収書に枠があるか確認してください。枠がない場合は「＋」で追加し、四隅を合わせます。最大8枚まで取り込めます。</p></details>
+      <details><summary>保存ボタンを押せません</summary><p>未入力の項目や、金額の形式に問題がないか確認してください。複数枚を登録する場合は、各領収書の入力内容と「要確認」の表示も確認します。</p></details>
+      <details><summary>カメラや写真を利用できません</summary><p>端末の「設定」でセムカンカメラのアクセス許可を確認してください。写真を選ぶ場合は、表示される写真選択画面から取り込みたい画像を選びます。</p></details>
+      <details><summary>送信できません</summary><p>インターネット接続とログイン状態を確認してください。ログインし直す案内が表示された場合は、再度ログインして送信します。送信が途中で止まった場合は、端末に残っている支出を再送してください。</p></details>
+      <details><summary>送信した支出がホームから消えました</summary><p>送信に成功した支出と画像は、端末から自動削除されます。メニューの「セムカン本体へ」から、送信した内容を確認してください。</p></details>
+      <p>解決しない場合は、メニューの「お問い合わせ情報」からお問い合わせください。</p>
+    </section>
+    <footer>
+      <p>更新日：2026年10月5日<br>アプリのバージョンによって、画面の表示や操作が異なる場合があります。</p>
+      <a class="back" href="#top">ページの先頭へ戻る ↑</a>
+    </footer>
+  </main>
+</body>
 </html>
